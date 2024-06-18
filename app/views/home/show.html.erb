@@ -1,0 +1,13 @@
+<body class="gradient-custom-3">
+  <%= stylesheet_link_tag 'registration', media: 'all', 'data-turbolinks-track': 'reload' %>
+<h1>Appointment Details</h1>
+<p>Patient: <%= link_to @appointment.user_name, user_path(@appointment.user) %></p>
+<p>Dentist: <%= link_to @appointment.dentist_name, dentist_path(@appointment.dentist) %></p>
+<p>Location: <%= @appointment.branch %></p>
+<p>Start Time: <%= @appointment.start_time.strftime('%b %e, %l:%M %p') %></p>
+<p>End Time: <%= @appointment.end_time.strftime('%b %e, %l:%M %p') %></p>
+<%= link_to "Edit Appointment", edit_appointment_path(@appointment) %>
+<%= form_tag(appointment_path(@appointment), method: :delete, style: 'display: inline-block;') do %>
+  <%= submit_tag "Delete Appointment" %>
+<% end %>
+</body>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointment</title>
+    <%= stylesheet_link_tag 'registration', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body class="gradient-custom-3">
+
+<div class="register">
+    <h1>Sign Up</h1>
+    <%= form_with model: @user, url: register_path, html: {class: "container"}, param: :user do |form| %>
+        <% if form.object.errors.any? %>
+            <div class="alert">
+                <% form.object.errors.full_messages.each do |message| %>
+                    <div><%= message %></div>
+                <% end %> 
+            </div>
+        <% end %>
+        
+        <%= form.text_field :email, placeholder: "Email", class: "form-control" %>
+        <%= form.password_field :password, placeholder: "Password", class: "form-control" %>
+        <%= form.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control" %>
+        <%= form.text_field :firstname, placeholder: "First Name", class: "form-control" %>
+        <%= form.text_field :middlename, placeholder: "Middle Name", class: "form-control" %>
+        <%= form.text_field :lastname, placeholder: "Last Name", class: "form-control" %>
+        <%= form.date_field :birthdate, placeholder: "Birth Date", class: "form-control" %>
+        <%= form.text_field :phone_number, placeholder: "Phone Number", class: "form-control" %>
+        <%= form.number_field :age, placeholder: "Age", class: "form-control" %>
+        <%= form.text_field :medicalhistory, placeholder: "Medical History", class: "form-control" %>
+
+        <%= form.submit "Sign Up", class: "registerbtn gradient-custom-4" %>
+    <% end %>
+</div>
+
+</body>
+</html>

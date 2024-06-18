@@ -1,0 +1,8 @@
+<h1><%= @user.firstname %></h1>
+<p><%= link_to "Book appointment for #{@user.firstname} ", new_user_appointment_path(@user) %></p>
+<p><%= link_to "#{@user.firstname}'s appointments", user_appointments_path(@user) %></p>
+<p><%= link_to  "Edit Patient", edit_user_path(@user) %>
+<%= form_tag(users_path(@user), method: :delete) do%>
+<%= submit_tag "Delete Patient" %>
+<% end %>
+</p>

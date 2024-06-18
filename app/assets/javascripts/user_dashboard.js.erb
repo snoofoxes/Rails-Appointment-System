@@ -1,0 +1,26 @@
+document.addEventListener('turbolinks:load', function() {
+  // jQuery logic for updating appointment status in the user dashboard
+  $('.approve-appointment').click(function() {
+    var appointmentId = $(this).data('appointment-id');
+    approveAppointment(appointmentId);
+  });
+
+  $('.cancel-appointment').click(function() {
+    var appointmentId = $(this).data('appointment-id');
+    cancelAppointment(appointmentId);
+  });
+
+  function approveAppointment(appointmentId) {
+    // Make an AJAX request to update the appointment status to 'accepted'
+    // Update the UI accordingly
+    // Example: You might change the status color to green
+    $('#appointment-' + appointmentId + ' .pending-status').html('<b style="color: green;">Accepted</b>');
+  }
+
+  function cancelAppointment(appointmentId) {
+    // Make an AJAX request to update the appointment status to 'cancelled'
+    // Update the UI accordingly
+    // Example: You might change the status color to red
+    $('#appointment-' + appointmentId + ' .pending-status').html('<b style="color: red;">Cancelled</b>');
+  }
+});

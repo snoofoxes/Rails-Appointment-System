@@ -1,0 +1,50 @@
+<body class="gradient-custom-3">
+  <%= stylesheet_link_tag 'registration', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <h1>Appointment Details</h1>
+  <%= show_errors_for(@appointment) %>
+
+  <%= form_for @appointment do |f| %>
+    <p>
+      <%= f.label :user_id, "Patient: " %>
+      <%= f.hidden_field :user_id %>
+      <b><%= Current.user.firstname %></b>
+    </p>
+
+    <p>
+      <%= f.label :branch, "Branch" %>  
+      <%= f.select :branch, ['ButuanCity', 'Cabadbaran'] %> 
+    </p>
+
+    <p>
+      <%= f.label :service, "Service" %>
+      <%= f.select :service, ['Cleaning', 'Check-Up', 'Cosmetic', 'Tooth Fillings', 'Tooth Extraction', 'Teeth Cleaning', 'X-ray and other Diagnostic Services', 'Children Dentistry', 'Tooth Implants', 'Dentures and Tooth Capping'] %> 
+    </p>
+
+    <p>
+      <%= f.label :dentist_id, "Dentist" %>
+      <%= f.collection_select :dentist_id, Dentist.all, :id, :firstname %>
+    </p>
+
+    <p>
+    <%= f.label :start_time %>
+    <%= f.datetime_field :start_time %>
+  </p>
+
+  <p>
+    <%= f.label :end_time %>
+    <%= f.datetime_field :end_time %>
+  </p>
+    
+    <p>
+      <%= f.label :status, "Status" %>
+      <%= f.select :status, ['pending'] %>
+    </p>
+
+    <% if @appointment.persisted? && @appointment.status == "pending" %>
+      <%= link_to 'Approve', approve_appointment_path(@appointment), method: :post %>
+      <%= link_to 'Cancel', cancel_appointment_path(@appointment), method: :post %>
+    <% end %>
+
+    <%= f.submit %>
+  <% end %>
+</body>

@@ -1,16 +1,50 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="">Zamora Dental Clinic</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/">Home</a>
-        <a class="nav-link" href="/login">Login</a>
-        <a class="nav-link" href="#">Pricing</a>
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
     </div>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <% if Current.user %>
+        <li class="nav-item">
+          <%= link_to "Create Appointment", new_appointment_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "User Dashboard", users_dashboard_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to Current.user.firstname, edit_password_path, class: "nav-link" %> 
+        </li>
+        <li class="nav-item">
+          <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-outline-success" %>
+        </li>
+      <% elsif Current.dentist %>
+        <li class="nav-item">
+          <%= link_to "Dentist Dashboard", dentists_dashboard_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to Current.dentist.firstname, edit_password_path, class: "nav-link" %> 
+        </li>
+        <li class="nav-item">
+          <%= button_to "Logout", logout_dentist_path, method: :delete, class: "btn btn-outline-success" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Register", register_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Login", login_path, class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </nav>

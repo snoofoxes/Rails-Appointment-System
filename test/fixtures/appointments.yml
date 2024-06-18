@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dentists: one
+  users: one
+  branch: MyString
+  start_time: 2023-10-28 07:28:44
+  end_time: 2023-10-28 07:28:44
+  service: MyString
+
+two:
+  dentists: two
+  users: two
+  branch: MyString
+  start_time: 2023-10-28 07:28:44
+  end_time: 2023-10-28 07:28:44
+  service: MyString

@@ -1,0 +1,33 @@
+<body class="gradient-custom-3">
+  <%= stylesheet_link_tag 'registration', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <div class="container">
+    <h1>Welcome, Dr. <%= Current.dentist.firstname %>!</h1>
+
+    <section>
+      <h2>Your Profile</h2>
+      <p>Name: <%= Current.dentist.firstname %> <%= Current.dentist.lastname %></p>
+      <p>Email: <%= Current.dentist.email %></p>
+    </section>
+
+    <section>
+      <h2>Upcoming Appointments</h2>
+      <ul>
+        <% @appointments.each do |appointment| %>
+          <% if appointment.start_time.future? %> 
+            <li>
+              <strong><%= appointment.start_time.strftime('%b %e, %l:%M %p') %>:</strong>
+              Appointment with <%= appointment.user_name %>
+              <%= appointment.status == "cancelled" ? raw('<span class="text-danger">Cancelled</span>') : '' %>
+              <% if appointment.status == "pending" %>
+                <%= button_to 'Approve', approve_appointment_path(appointment), method: :patch, class: 'approve-appointment', data: { appointment_id: appointment.id } %>
+                <%= button_to 'Cancel', cancel_appointment_path(appointment), method: :patch, class: 'cancel-appointment', data: { appointment_id: appointment.id } %>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <%= javascript_include_tag 'approve' %>
+      <%= javascript_include_tag 'cancel' %>
+    </section>
+  </div>
+</body>

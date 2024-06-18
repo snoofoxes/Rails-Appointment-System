@@ -1,0 +1,23 @@
+document.addEventListener('DOMContentLoaded', function() {
+  const approveButtons = document.querySelectorAll('.approve-appointment');
+
+  approveButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const appointmentId = this.dataset.appointmentId;
+
+      fetch(`/appointments/${appointmentId}/approve`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': Rails.csrfToken()
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Update the UI or perform additional actions as needed
+        console.log('Appointment approved:', data);
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  });
+});
